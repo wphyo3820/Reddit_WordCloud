@@ -19,12 +19,13 @@ def scrape_top_subreddits(url, limit):
                         return pd.DataFrame({"subreddits": data})
     return None
 
+
 def scrape_subreddit_data(reddit, subreddits):
     data = []
     for subr in subreddits:
         sub = reddit.subreddit(subr).top(limit=1000)
         data.extend([{"subreddit": subr, "id": s.id, "title": s.title,
-                      "gilded": s.gilded, "upvotes": s.ups, "downvotes": s.downs, "score": s.score} for s in sub])
+                      "gilded": s.gilded, "score": s.score} for s in sub])
         print("Finished scraping r/{}".format(subr))
     return pd.DataFrame(data)
 
