@@ -6,7 +6,7 @@ Then, make sure you have python, pip and virtual env installed. If not follow th
 
 Next, go into your terminal and navigate to this folder and type the following commands:
 
-```virtualenv venv & source venve/bin/activate & pip install -r requirements.txt & source venv/bin/activate```
+```virtualenv venv & source venv/bin/activate & pip install -r requirements.txt```
 
 ## Running the web-application
 Now, all you need to do is run the application! Like so: ```python app.py``` and open http://127.0.0.1:8050/ on your browser.
