@@ -30,14 +30,16 @@ def scrape_subreddit_data(reddit, subreddits):
     return pd.DataFrame(data)
 
 
-if __name__ == "__main__":
+def scrape(limit, save):
     reddit = praw.Reddit(client_id='JRRDQWr5Mn_8LA', client_secret='gmhoQTNiZhEp4hj08q7s_lb7Is0',
                          user_agent='Comment Extraction by /u/ivanchen9520')
     # STEP 1: get the top subreddits
-    subreddits = scrape_top_subreddits("http://www.redditlist.com", 100)
-    subreddits.to_csv("subs.csv", index=False)
-
+    subreddits = scrape_top_subreddits("http://www.redditlist.com", limit)
     # STEP 2: get top posts from subreddits
-    subs = pd.read_csv("subs.csv")
-    data = scrape_subreddit_data(reddit, subs.subreddits)
-    data.to_csv("posts.csv", index=False)
+    data = scrape_subreddit_data(reddit, subreddits.subreddits)
+
+    if save:
+        subreddits.to_csv("subs.csv", index=False)
+        data.to_csv("posts.csv", index=False)
+    
+    return (subreddits, data)
