@@ -28,6 +28,8 @@ def generate_drop_down(subreddits, id):
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
+server = app.server
+
 app.layout = html.Div([
     dbc.Container([
 		dbc.Row(html.Br()),
