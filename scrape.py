@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# coding: utf-8
+
 from bs4 import BeautifulSoup
 import requests
 import praw
@@ -30,16 +33,13 @@ def scrape_subreddit_data(reddit, subreddits):
     return pd.DataFrame(data)
 
 
-def scrape(limit, save):
+if __name__ == "__main__":
     reddit = praw.Reddit(client_id='JRRDQWr5Mn_8LA', client_secret='gmhoQTNiZhEp4hj08q7s_lb7Is0',
                          user_agent='Comment Extraction by /u/ivanchen9520')
     # STEP 1: get the top subreddits
-    subreddits = scrape_top_subreddits("http://www.redditlist.com", limit)
+    subreddits = scrape_top_subreddits("http://www.redditlist.com", 50)
     # STEP 2: get top posts from subreddits
     data = scrape_subreddit_data(reddit, subreddits.subreddits)
-
-    if save:
-        subreddits.to_csv("subs.csv", index=False)
-        data.to_csv("posts.csv", index=False)
-    
-    return (subreddits, data)
+    # save dataframes
+    subreddits.to_csv("data/subs.csv", index=False)
+    data.to_csv("data/posts.csv", index=False)
