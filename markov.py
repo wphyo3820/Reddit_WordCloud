@@ -1,11 +1,13 @@
 import pandas as pd
 import numpy as np
+import os
 import json
 
-def read_json_matrix(subreddit):
+def read_json_matrix(root, subreddit):
     result = {}
     for i in ["start", "one", "two"]:
-        with open("data/{}/{}.json".format(i, subreddit)) as infile:
+        filepath = os.path.join(root, "data/{}/{}.json".format(i, subreddit))
+        with open(filepath) as infile:
             result[i] = json.load(infile)
     return result
 

@@ -90,8 +90,9 @@ def on_button_click(n, current_sub):
 
 
 if __name__ == '__main__':
+    SRCDIR = os.path.dirname(os.path.abspath(__file__))
     for sub in subreddits:
-        sub_mat = markov.convert_json_matrix(**markov.read_json_matrix(sub))
+        sub_mat = markov.convert_json_matrix(**markov.read_json_matrix(SRCDIR, sub))
         matrices[sub] = {
             "start_df": sub_mat[0],
             "one_df": sub_mat[1],
